@@ -10,3 +10,5 @@ venv/
 .DS_Store
 traces/
 .pytest_cache/
+data/raw/
+references/

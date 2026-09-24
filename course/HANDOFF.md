@@ -1,5 +1,7 @@
 # Handoff: read this first
 
+**Superseded in parts, 20th September 2026.** The project pivoted from GitHub issue triage to complaint triage for a fictional bank on 19th September 2026. Read `course/STATE.md` first, then `docs/pivot_change_map.md`. Where this file disagrees with STATE.md, STATE.md wins.
+
 A fresh session starts here. Everything needed to continue is in this file plus `SYLLABUS.md`.
 
 ## Who this is for
@@ -10,20 +12,21 @@ Subhasish Goswami. Senior product leader, 14 years, fintech and applied AI. Not 
 
 ## What we are building
 
-A GitHub issue triage agent. A live webhook receives issues from a repo, an agent classifies them, retrieves context from that repo's own documentation, drafts a response, decides whether it may act alone or must escalate to a human, writes labels and comments back to GitHub, and logs every decision. A nightly job re-runs a gold set and blocks a prompt change that degrades quality.
+A complaint triage agent behind a fictional bank's support chat. A customer message arrives from Chatwoot (an open source helpdesk) by webhook. The agent masks card and account numbers, classifies the complaint, checks it against a written escalation policy, and either answers from the bank's own help articles with citations or hands the conversation to a human with a private note explaining why. It logs every decision without personal data. A nightly job re-runs a gold set built from real public complaints (the CFPB database) and blocks any prompt change that degrades quality.
 
-Same shape as an enterprise support-deflection deployment. Public data, so it can be published.
+This is the same shape as an enterprise support deflection deployment, in a regulated domain, on public data, so it can be published.
 
 ## Decisions already locked
 
 | Decision | Choice | Why |
 |---|---|---|
-| Domain | GitHub issue triage | Real API, public data, publishable, mirrors enterprise support deflection |
+| Domain | Complaint triage for a fictional bank (pivoted from GitHub issue triage on 19th September 2026) | Live market, real labeled public data (CFPB), escalation errors carry regulatory weight, the builder's domain edge |
+| Live system | Chatwoot | Open source helpdesk, agent bot webhooks, handoff by status change, private notes. Cloud paid plan or self hosted: pending decision |
 | Language | Python | What he can already read, and where the agent tooling lives |
 | Graph | LangGraph | State, conditional edges, checkpoints, human in the loop |
 | Service | FastAPI | Webhook endpoint |
 | Storage | SQLite first, Postgres at deploy | Do not over-build early |
-| Deploy | Render | Free tier, public URL, simple |
+| Deploy | Render or Railway | Decided in Stage 4 |
 | Model | Anthropic API | He has access |
 | Pace | Demo-ready in about a week, roughly 15 hours | An interview round may land |
 
@@ -38,29 +41,10 @@ Same shape as an enterprise support-deflection deployment. Public data, so it ca
 
 ## Where we are right now
 
-Scaffolded, nothing built:
-
-```
-~/Developer/triage-agent/
-  .gitignore
-  .env.example
-  course/
-    SYLLABUS.md      ten modules, content track, monetisation view
-    MODULE_00.md     foundations, ready to run
-    HANDOFF.md       this file
-```
-
-**Not done yet:** Module 0 has not been run. No venv, no git init, no PRD, no brain dump, no code.
-
-## The immediate next action
-
-Two open threads, in this order:
-
-1. **The PRD.** Stage 1 of the idea-to-prototype skill. Three questions to him: product name, what it does in one sentence, and a raw brain dump. Produce `brain_dump.md` and a **lean** `prd.md`: problem, users, MVP scope, success metrics, risks. Defer pricing, distribution and full competitive analysis to modules 11 and 12, because writing a pricing section before the first API call is fiction. Then run skill stages 2 to 4 (differentiation, flows and user stories, technical discovery). **Skip stages 5 and 6**, which produce a design system and a mocked frontend and would send this sideways.
-2. **Module 0.** Commands are in `MODULE_00.md`. Proof: `git status` must not list `.env`.
+See `course/STATE.md`. It is the only live status file.
 
 ## Portfolio and monetisation stance
 
 This is a portfolio artifact and possibly a product. Public repo, README that grows per module, one content piece per module (Substack long, LinkedIn short).
 
-On money, the honest ranking: credibility into job offers first, consulting inbound second, open core third, GitHub Marketplace app fourth. Probability of meaningful revenue is low. Probability of changing how an interviewer sees him is high. Build for the second, keep the door open for the first: per-tenant config rather than hardcoding, no personal data in the schema, clean service boundary. No billing until a stranger asks to pay.
+On money, the honest ranking: credibility into job offers first, consulting inbound second, open core third, helpdesk marketplace app fourth. Probability of meaningful revenue is low. Probability of changing how an interviewer sees him is high. Build for the second, keep the door open for the first: per-tenant config rather than hardcoding, no personal data in the schema, clean service boundary. No billing until a stranger asks to pay.
