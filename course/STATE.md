@@ -2,11 +2,15 @@
 
 **Read this before doing anything.** Both Claude Code and the Cowork project chat should update it when something changes. If this file disagrees with HANDOFF.md, this file wins.
 
-Last updated: 22nd September 2026. Stage 3 done, PRD v1.4. See docs/pivot_change_map.md.
+Last updated: 24th September 2026. Stage 3 done, PRD v1.4, Module 0B done and the repo is public. See docs/pivot_change_map.md.
 
 ## Repo
 
 Lives at `~/Developer/triage-agent`. It was moved here from `~/Documents/triage-agent`, so any doc still saying Documents is stale.
+
+**Public at https://github.com/subhasishgoswami02/warmhand**, MIT licensed, pushed 24th September 2026.
+
+**History note.** The first commit was originally `fd0cb78`. It was amended to `58ef2f1` before the first push, to strip career sensitive lines (a named prospective employer, a former employer) from `course/HANDOFF.md` and `course/PROJECT_INSTRUCTIONS.md`. Safe to do because nothing had been pushed and no remote existed. `fd0cb78` is still in the local reflog, unreachable, and was never pushed. Any doc citing `fd0cb78` is stale.
 
 ## Module 0: complete
 
@@ -18,13 +22,34 @@ All four proofs passed:
 
 Optional tidy-up, not blocking: `python -m pip install --upgrade pip` with the venv active.
 
-**Pending, the explain-back. Subhasish answers these in his own words. Do not accept "it worked" as understanding, and do not answer them for him:**
+**Explain-back: passed, 24th September 2026.** All four answered in his own words.
 
-1. What does a virtual environment protect you from?
-2. Why is `.env.example` committed but `.env` is not?
-3. If you commit an API key and delete it in the very next commit, is the key safe?
+- Committed key: correct, including that rotation is the only real fix. Sharpened: the old commit is directly viewable, no rollback needed, and bots scrape public repos within seconds
+- `--amend`: correct on why it was safe pre-push. Sharpened: after a push, rewriting is cosmetic because the content is already on GitHub's servers, in caches and in clones
+- `.env.example` vs `.env`: half on first pass. Corrected: the example is the shopping list of variable names so a cloner knows what to supply, and `.gitignore`, not the example file, is what keeps the real `.env` out
+- Hook vs `.gitignore`: correct, including the `git add -f` case. Added: `.gitignore` also does nothing for a file that is already tracked
 
-Question 3 is the one people get wrong. The answer is no, and the reason matters.
+## Module 0B: complete, 24th September 2026
+
+**Public at https://github.com/subhasishgoswami02/warmhand**, MIT licensed, pushed 24th September 2026.
+
+Five commits on `main`, all pushed:
+
+| Commit | What |
+|---|---|
+| `58ef2f1` | Module 0: repo skeleton, secret hygiene, course plan (amended, see the history note below) |
+| `68fd73d` | Archive GitHub-era PRD and competitive brief |
+| `72bfb9d` | MIT license and a pre-commit hook that blocks `.env` files |
+| `ea33a7b` | Pivot to bank complaint triage: Warmhand PRD v1.4, escalation policy, flows and stories |
+| `c4943f0` | Module 0B: the hook needs `core.hooksPath` after every clone |
+
+**History note.** The first commit was originally `fd0cb78`. It was amended to `58ef2f1` before the first push, to strip career sensitive lines (a named prospective employer, a former employer) from `course/HANDOFF.md` and `course/PROJECT_INSTRUCTIONS.md`. Safe because nothing had been pushed and no remote existed. `fd0cb78` is still in the local reflog, unreachable, and was never pushed. Any doc citing `fd0cb78` is stale.
+
+**The rule that came out of it:** for a public repo, scan history (`git grep` across `git rev-list --all`), not just the working tree. A working tree scan misses everything already committed. This nearly shipped the interview details publicly.
+
+Proofs passed: the hook refused a staged fake `.env`; every commit scanned clean for secrets and career sensitive terms; GitHub contents match local; no `.env`, `references/`, `data/raw/` or `traces/` on the remote.
+
+**GitHub push protection: on.** Confirmed 24th September 2026 under Settings, Security and quality, Advanced Security. Secret Protection and Push protection were both already enabled.
 
 ## PIVOT, 19th September 2026: GitHub issue triage is dropped, bank complaint triage replaces it
 
@@ -67,7 +92,7 @@ Done in the pivot so far: `course/SYLLABUS.md` v2 (the full learning map, Part 0
 
 **Stage 3 done, 22nd September:** `docs/flows_and_stories.md`. Six flows, 22 user stories (US-1 to US-22), Given/When/Then acceptance criteria, a pipeline diagram, gate traceability, and a list of what was cut on purpose. PRD v1.4. The review's last P0 (no user stories) is closed.
 
-**Next:** Subhasish reviews the flows and stories, runs Module 0B in Claude Code, then Stage 4 (technical discovery: the Chatwoot trial checks and the CFPB narrative checks). Then Stage 3 (flows, user stories, acceptance criteria), then Stage 4 (Chatwoot trial and CFPB checks). In parallel in Claude Code: the Module 0 gaps (LICENSE, public repo, `.env` hook), the Module 0 explain back, then Module 1.
+**Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 
 Commit order, so the pivot shows in history (this replaces the earlier order):
 1. `docs/archive/github/` (the GitHub era PRD and brief, as evidence)
