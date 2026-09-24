@@ -1,0 +1,7 @@
+#!/bin/sh
+blocked=$(git diff --cached --name-only | grep -E '(^|/)\.env($|\.)' | grep -v '\.env\.example$')
+if [ -n "$blocked" ]; then
+  echo "Refused: a .env file is staged:"
+  echo "$blocked"
+  exit 1
+fi
