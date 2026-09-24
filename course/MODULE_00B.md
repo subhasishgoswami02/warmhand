@@ -33,6 +33,10 @@ git ls-files | grep -i env
 
 **Why a `.githooks/` folder and not `.git/hooks/`?** Files inside `.git/` are never committed. A hook in `.githooks/` lives in the repo, so anyone who clones it gets the same protection after running step 4.
 
+**After every fresh clone, run `git config core.hooksPath .githooks`.** The hook file travels with the repo, but the setting that switches it on is local to each machine and does not. Until you run it, the hook does nothing. Keep this line for the README.
+
+**Why push protection still matters.** The hook is a courtesy: it only runs where someone has switched it on, and `git commit --no-verify` skips it. GitHub's push protection (Step 6) runs on the server for every push, from every clone. The hook is a courtesy, the server-side check is the guarantee. Same lesson as the product: rules in a prompt are wishes, rules in code are guarantees.
+
 **Proof:**
 ```bash
 git add -f .env
