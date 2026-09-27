@@ -106,6 +106,14 @@ Cross-check passed: filtering the current structured export in code reproduces 4
 
 New finding: median narrative is 206 words (90th percentile 478, max 5,347). These are written submissions, not chat turns. Decision recorded in `data/SOURCE.md`: the full narrative is the input, and the README says so rather than implying the agent was tested on short chat messages.
 
+**Gold set drawn, 27th September 2026.** `scripts/build_gold_set.py`, seed 20260927, reproducible. 120 cases in `evals/gold_set_raw.csv` (gitignored, holds narrative text). Disjoint strata by priority so nothing appears twice: Reg Z 25, Reg E 25, Older American 20, Servicemember 20, ambiguous middle 30. Drawn from April to June 2026 only.
+
+Sanity check on the draw: median 204 words, longest 814, and 17 of 120 are over 400 words, which is close to the 10 to 15 percent the full pool predicted.
+
+Policy v0.3 adds two length triggers in section 3 (hand off over 400 words, truncate the model's view at 2,000) with the measured basis recorded. Stories US-23 and US-24 added, including the adversarial case: an injection buried at word 2,500 of a 3,000 word complaint.
+
+`evals/LABELLING.md` has the labelling instructions. **Next human step: Subhasish labels all 120.** Two to three hours, two sittings. No model labels any of them, or the benchmark measures nothing. Label on content and ignore the length rule while labelling, so the two rules can be compared rather than one baked into the other.
+
 **Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 
 Commit order, so the pivot shows in history (this replaces the earlier order):
