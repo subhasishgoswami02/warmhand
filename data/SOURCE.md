@@ -101,6 +101,36 @@ The README states plainly that narratives end on 14th August 2026 and why. It ne
 
 The committed gold set is complaint ID plus our labels, never the narrative text. Labels are ours; the text is CFPB's. Pinning by ID keeps the set reproducible and keeps consumer text out of this repo.
 
+## Measured pool, 27th September 2026
+
+Counted by `scripts/count_strata.py`, which reads the monthly exports, keeps our two products and rows with narrative text, and prints the size of every stratum. Rerun it to reproduce any number below.
+
+**Primary pool, April to June 2026: 19,569 complaints** (10,089 checking or savings, 9,480 credit card). April to July would be 23,416, but July is not needed.
+
+| Stratum | Available, April to June | Gold set target |
+|---|---|---|
+| Reg Z billing error (problem with a purchase shown on your statement) | 3,351 | 25 |
+| Reg E unauthorized (problem with a lender or other company charging your account) | 1,659 | 25 |
+| Older American tagged | 1,590 | 20 |
+| Servicemember tagged | 1,774 | 20 |
+| Both tags | 330 | n/a |
+| Any vulnerability tag | 3,694 | n/a |
+| Ambiguous middle (managing an account, closing, other) | 8,294 | 30 |
+
+**Decision: July is excluded from the gold set.** Every stratum is comfortably supplied by April to June, so there is no reason to take the months affected by the publication cutoff. This removes the early-response selection bias from the sample entirely. July and August remain useful for structured counts only.
+
+**Narrative length: median 206 words, mean 254, 90th percentile 478, longest 5,347.**
+
+This is the third mismatch between the corpus and Warmhand's real input, and the one least likely to be noticed:
+
+| Mismatch | Effect on the eval |
+|---|---|
+| Post-failure corpus | Contains almost no easy answerable questions |
+| Consent selection | Complainants who opted in are angrier and more articulate than average |
+| Length and register | 206-word written submissions, not short chat turns |
+
+**Decision: the full narrative is the input.** The gold set measures triage of a long written complaint, which is a real and defensible task. Deriving short chat-style openers from each narrative would mean inventing the input, and the realness of the data is the point of using it. The README states this rather than implying the agent was tested on chat messages.
+
 ## Caveats that shape the product, not just the data handling
 
 1. Narratives arrive pre-redacted, with personal details replaced by `XXXX`. They cannot test the PII masker. The masker needs its own synthetic recall and precision sets.

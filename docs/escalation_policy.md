@@ -1,6 +1,6 @@
 # Kettlewick Bank: Warmhand escalation policy
 
-**Version 0.2, draft, 22nd September 2026** (adds section 3A, fraud, and template T7). Policy owner: Subhasish Goswami (acting as compliance for this demo). Kettlewick Bank is fictional. This policy is a portfolio artifact, not legal advice.
+**Version 0.3, draft, 27th September 2026** (adds the message length triggers in section 3, measured against real complaint data). Version 0.2, 22nd September 2026, added section 3A, fraud, and template T7. Policy owner: Subhasish Goswami (acting as compliance for this demo). Kettlewick Bank is fictional. This policy is a portfolio artifact, not legal advice.
 
 **Purpose.** This policy decides when Warmhand, the bank's support assistant, may answer a customer and when it must hand the conversation to a human. The code implements this document. If the code and this document disagree, the code has a bug.
 
@@ -50,6 +50,14 @@
 | The customer writes again after Warmhand has replied | Hand off with a private note, no second reply |
 | Anything unclear, or the model output fails validation | T1 |
 | Any error: model down, timeout, retrieval failure | T1 if Chatwoot is reachable. Otherwise the watchdog opens the conversation |
+| **Message over 400 words** | **T1. Length is a handoff signal in itself** |
+| **Message over 2,000 words** | **T1, and the note carries the first 2,000 words only, marked truncated** |
+
+**Why length triggers a handoff.** Measured on 19,569 real CFPB complaints for these products (`scripts/count_strata.py`): median 206 words, 90th percentile 478, longest 5,347. A message past 400 words is in the top tenth and is almost always multi-issue, emotional, or already past the point where an article helps. Warmhand does not try to answer it.
+
+The 2,000 word cap is a separate protection: it bounds cost and context, and it bounds the injection surface, since a longer message is more room to hide instructions aimed at the bot. Truncation applies to what Warmhand processes, never to what the human sees. The human always gets the full conversation in Chatwoot.
+
+**Not built on purpose:** summarising the message back to the customer for confirmation. They wrote it, they know what it says, and it costs a turn. The summary belongs in the private handoff note, whose reader is the agent picking the case up.
 
 ## 3A. Fraud
 

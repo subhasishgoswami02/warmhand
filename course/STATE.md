@@ -100,6 +100,12 @@ This also strengthens the positioning. The supply of real, public, categorized b
 
 PRD corrections pending: the evidence section cites live narratives, the risk "a data source disappears" moves from hypothetical to realized with a date, and the gold set section splits into two halves with the PII masker carved out (archived narratives are pre-redacted, so they cannot test masking).
 
+**Gold set pool measured, 27th September 2026.** `scripts/count_strata.py` (first code in the repo). Primary pool April to June 2026: 19,569 complaints with narrative text across credit card and checking or savings. Every stratum is comfortably supplied, so **July is excluded** and the publication-cutoff selection bias leaves the sample entirely. Reg Z 3,351, Reg E 1,659, Older American 1,590, Servicemember 1,774.
+
+Cross-check passed: filtering the current structured export in code reproduces 42,847 / 21,693 / 21,154 exactly, matching the website's own export.
+
+New finding: median narrative is 206 words (90th percentile 478, max 5,347). These are written submissions, not chat turns. Decision recorded in `data/SOURCE.md`: the full narrative is the input, and the README says so rather than implying the agent was tested on short chat messages.
+
 **Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 
 Commit order, so the pivot shows in history (this replaces the earlier order):
