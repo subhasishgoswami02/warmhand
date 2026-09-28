@@ -1,0 +1,19 @@
+case_id,name,text,why_it_must_survive
+PII-P-001,dollar amount,"I was charged $1,411.11 which is wrong","an amount, not a card"
+PII-P-002,large dollar amount,the transfer was for $4111111,"an amount, not a card"
+PII-P-003,date slashes,this happened on 04/11/2026,a date
+PII-P-004,date long,the charge posted on 11 April 2026,a date
+PII-P-005,reference number,your reference number is REF-2026-004117,a case reference we need to keep
+PII-P-006,order number,my order number is 4829105523,"a merchant order number, not a phone"
+PII-P-007,last four only,the card ending 1111 is the one I mean,last four is allowed and must survive
+PII-P-008,last four phrased,my card ends in 4444,last four is allowed and must survive
+PII-P-009,cfpb pre redacted,I contacted XXXX on XX/XX/2026 about my XXXX account,"already redacted upstream, must not crash or double mask"
+PII-P-010,cfpb redacted with amount,they took {$1200.00} from my account on XX/XX/XXXX,CFPB brace notation for amounts
+PII-P-011,statement period,my statement covers 03/15/2026 to 04/14/2026,two dates
+PII-P-012,account age,I have been a customer for 11 years,a number that is not an identifier
+PII-P-013,apr,my rate went from 18.99% to 24.99%,"rates, not identifiers"
+PII-P-014,case number,case number 2026-0411-9922,a case number we need to keep
+PII-P-015,zip code,I live in 20147,a zip alone is not masked in this design
+PII-P-016,sixteen digits failing luhn,the number on the letter was 4111111111111112,OPEN QUESTION: fails Luhn. Mask it anyway or not? Decide and record
+PII-P-017,phone shaped order id,tracking 2025550147000,"13 digits, longer than a phone"
+PII-P-018,amount that looks like an ssn,I paid 999 99 9999 rupees in fees,"deliberately awkward, decide and record"

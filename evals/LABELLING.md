@@ -1,6 +1,6 @@
 # How to label the gold set
 
-120 cases in `evals/gold_set_raw.csv` (local only, never committed). Your labels are the asset in this repo. Anyone can download the CFPB data. Nobody else has a bank product manager's escalation calls attached to it.
+**30 cases** in `evals/gold_set_raw.csv` (cut from 120 on 28th September, so the loop closes in one sitting rather than next month) (local only, never committed). Your labels are the asset in this repo. Anyone can download the CFPB data. Nobody else has a bank product manager's escalation calls attached to it.
 
 ## Before you start
 
@@ -22,10 +22,10 @@ Read `docs/escalation_policy.md` once, start to finish. You are labelling agains
 
 ## Rules that keep the set honest
 
-1. **Label on content, not on length.** 17 of the 120 are over 400 words and would hand off on length alone under policy v0.3. Label them as if that rule did not exist. That way we can measure whether the length rule agrees with the content rule, rather than baking the answer in.
-2. **Do not let any model label for you.** A benchmark of one model against another model's opinion measures nothing. Every one of the 120 is your call.
+1. **Label on content, not on length.** 1 of the 30 is over 400 words and would hand off on length alone under policy v0.3. Label them as if that rule did not exist. That way we can measure whether the length rule agrees with the content rule, rather than baking the answer in.
+2. **Do not let any model label for you.** A benchmark of one model against another model's opinion measures nothing. Every one of the 30 is your call.
 3. **Label blind to the stratum column** where you can. Knowing a case was drawn as "reg_e_unauthorized" will pull you toward handing off. Read the narrative first, decide, then look.
-4. **Expect to disagree with yourself.** Note the ones you found hard. Relabel the whole set a week later if you want a consistency check. Disagreeing with your past self on 5 of 120 is a real and publishable number, and a more honest one than claiming perfect consistency.
+4. **Expect to disagree with yourself.** Note the ones you found hard. Relabel the whole set a week later if you want a consistency check. Disagreeing with your past self on 2 of 30 is a real and publishable number, and a more honest one than claiming perfect consistency.
 5. **`answer` should not be zero, but it will be rare.** This is a regulator complaint corpus: everyone in it already tried their bank. If you end up with two or three `answer` cases out of 120, that is the data telling the truth, and it is exactly why the synthetic answerable half exists.
 
 ## The synthetic half: `evals/synthetic_cases.csv`
@@ -40,7 +40,7 @@ The sharpest case in the set is SYN-026, "how long do I have to dispute a charge
 
 ## Budget
 
-Two to three hours. Do it in two sittings rather than one, and do not do it tired. The point of this file is decisions you would defend in front of a compliance officer.
+About an hour for the 30 real cases, plus 20 minutes for the 40 synthetic ones, which are single sentences. One sitting. Do not do it tired. The point of this file is decisions you would defend in front of a compliance officer.
 
 ## When you finish
 

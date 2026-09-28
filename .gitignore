@@ -16,3 +16,4 @@ references/
 # Gold set working files: contain CFPB narrative text, never committed
 evals/gold_set_raw.csv
 evals/gold_set_labeled.csv
+evals/gold_set_rehydrated.csv

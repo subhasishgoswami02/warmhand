@@ -1,5 +1,23 @@
 # Current state
 
+## AUDIT, 28th September 2026: the project had drifted
+
+Measured: 39,636 words of markdown, 347 lines of Python (all data wrangling), **zero calls to a language model**, 11 commits, 10 days. The stated goal was hands-on experience with agentic systems. Nothing in the repo was an agent.
+
+Diagnosis: every "carry on" produced another document, because documents are the fastest thing to produce and they feel like progress. Scope grew rather than shrank, against the project's own rule.
+
+Also named: the evaluation is **circular**. The policy author is the label author, the bank is fictional and the help articles are invented, so a perfect score measures compliance with the policy, not the quality of the policy. This is now stated in the README rather than discovered by a reviewer.
+
+Actions taken the same day:
+1. Gold set cut from 120 real cases to **30**, so the loop closes in one sitting
+2. `course/MODULE_01.md` written: the first API call, about 30 lines, typed by Subhasish. **Nothing else is added to this repo until it runs**
+3. `README.md` written, with a Limitations section that names the circularity, the post-failure corpus, the length mismatch, and the fact that nobody asked for this test set
+4. `evals/SECOND_LABELLER.md`: a brief for one person with bank operations experience to label 10 cases blind. The agreement rate gets published whatever it is
+5. Feature work frozen: fraud extensions, the audit log, Chatwoot and the recipes folder all wait
+
+Open, unbudgeted: there is no cost per complaint, because no API call has been made. Module 1 produces that number and it goes in this file.
+
+
 **Read this before doing anything.** Both Claude Code and the Cowork project chat should update it when something changes. If this file disagrees with HANDOFF.md, this file wins.
 
 Last updated: 24th September 2026. Stage 3 done, PRD v1.4, Module 0B done and the repo is public. See docs/pivot_change_map.md.
@@ -125,6 +143,16 @@ PRD open question 1 (approve help article topics, was blocking Module 5) is clos
 Its `proposed_decision` column is Claude's and is a draft, not a label. Subhasish overrules it in the same three columns as the real cases. Cases where he overrules are kept visible on purpose.
 
 Gold set now stands at 160: 120 real complaints (April to June, stratified, seed 20260927) plus these 40.
+
+**Reproducibility and masker tests written, 28th September 2026.**
+
+`evals/rehydrate.py`: rebuilds the gold set's complaint text from IDs. Important correction to the earlier plan: the live CFPB API cannot do this, because the Bureau stopped publishing narratives on 14th August 2026. Rehydration reads the archived monthly exports instead, and downloads them if missing. Missing IDs (consumer withdrew consent) are reported, never silently dropped.
+
+`scripts/split_gold_set.py`: turns the labelled file into the committable one, dropping narrative text. Refuses to write if any case is unlabelled, so a half finished pass cannot be published as complete.
+
+`evals/pii/`: 22 recall cases and 18 precision cases for the PII masker, plus a README. Synthetic on purpose: CFPB narratives arrive pre-redacted, so they would score a masker at 100 percent and prove nothing. Card numbers are the published processor test numbers, SSNs use the never-issued 999 prefix, the routing number is checksum valid and unassigned. Nothing belongs to anybody, so the set is publishable.
+
+Two decisions left open on purpose in `evals/pii/README.md`: whether a 16 digit number failing the Luhn check should still be masked, and how to treat digits that are an amount in one reading and an identifier in another. Both need a recorded decision, not a default.
 
 **Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 

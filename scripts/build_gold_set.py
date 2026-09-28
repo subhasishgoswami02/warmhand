@@ -1,6 +1,8 @@
 """
 Draw the stratified gold set from the CFPB narrative archive.
 
+v1 is 30 cases. See the note on TARGETS for why.
+
 Why stratified and not random: a random sample of 120 would be dominated by
 "Managing an account" and would contain almost no cases where being wrong is
 expensive. The strata are chosen so the set covers the decisions that carry
@@ -44,12 +46,19 @@ FILES = [
 REG_Z = "Problem with a purchase shown on your statement"
 REG_E = "Problem with a lender or other company charging your account"
 
+# v1 is 30 cases, not 120. Cut on 28th September after an audit found the project
+# had 39,636 words of documentation and zero model calls. Thirty is labellable in one
+# sitting, which means the loop closes this week instead of next month. The set grows
+# when a result shows it needs to grow, not before.
+#
+# The v2 shape is kept here because the strata are the decision, not the counts:
+# reg_z 25, reg_e 25, older_american 20, servicemember 20, ambiguous_middle 30.
 TARGETS = [
-    ("reg_z_billing_error", 25),
-    ("reg_e_unauthorized", 25),
-    ("older_american", 20),
-    ("servicemember", 20),
-    ("ambiguous_middle", 30),
+    ("reg_z_billing_error", 6),
+    ("reg_e_unauthorized", 6),
+    ("older_american", 5),
+    ("servicemember", 5),
+    ("ambiguous_middle", 8),
 ]
 
 

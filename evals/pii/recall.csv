@@ -1,0 +1,23 @@
+case_id,name,text,pii_type,must_not_appear_in_output
+PII-R-001,card plain,my card number is 4111111111111111 and it got charged twice,card,4111111111111111
+PII-R-002,card spaced,card 4111 1111 1111 1111 was used at a store I have never been to,card,4111 1111 1111 1111
+PII-R-003,card hyphenated,the card 5555-5555-5555-4444 is the one in question,card,5555-5555-5555-4444
+PII-R-004,card amex 15 digit,amex 378282246310005 shows a charge I did not make,card,378282246310005
+PII-R-005,card discover,my discover is 6011111111111117,card,6011111111111117
+PII-R-006,card digits split by words,"the card ending four one one one, full number 4012 8888 8888 1881",card,4012 8888 8888 1881
+PII-R-007,card in a sentence with no label,I used 4111111111111111 at the pump,card,4111111111111111
+PII-R-008,account number,my account number is 000123456789 and the balance is wrong,account,000123456789
+PII-R-009,routing number,routing 987654320 account 000123456789,routing,987654320
+PII-R-010,ssn,my social is 999-99-9999 if you need to verify me,ssn,999-99-9999
+PII-R-011,ssn no hyphens,ssn 999999999,ssn,999999999
+PII-R-012,email,you can reach me at jordan.blake@example.com any time,email,jordan.blake@example.com
+PII-R-013,email uppercase,write to J.BLAKE@EXAMPLE.ORG please,email,J.BLAKE@EXAMPLE.ORG
+PII-R-014,phone dashes,call me on 555-0134-9922,phone,555-0134-9922
+PII-R-015,phone parens,my number is (202) 555-0147,phone,(202) 555-0147
+PII-R-016,phone plain 10 digit,reach me 2025550147 after six,phone,2025550147
+PII-R-017,phone international,I am on +1 202 555 0147,phone,+1 202 555 0147
+PII-R-018,cvv,the three digits on the back are 731,cvv,731
+PII-R-019,pin,"my pin is 4829, does that help you look it up",pin,4829
+PII-R-020,multiple in one message,"card 4111111111111111, email jordan.blake@example.com, phone 2025550147",mixed,4111111111111111
+PII-R-021,card inside a long complaint,I have banked with you for eleven years and never had a problem until last month when a charge appeared that I did not recognise. The card is 4111111111111111 and I would like this looked into as a matter of urgency because I am not able to pay my rent.,card,4111111111111111
+PII-R-022,card typed with spaces every two,41 11 11 11 11 11 11 11,card,41 11 11 11 11 11 11 11
