@@ -114,6 +114,18 @@ Policy v0.3 adds two length triggers in section 3 (hand off over 400 words, trun
 
 `evals/LABELLING.md` has the labelling instructions. **Next human step: Subhasish labels all 120.** Two to three hours, two sittings. No model labels any of them, or the benchmark measures nothing. Label on content and ignore the length rule while labelling, so the two rules can be compared rather than one baked into the other.
 
+**Help articles written, 27th September 2026.** `docs/help_articles/`, five articles, about 2,000 words. Cut from the PRD's proposed ten using the measured issue counts: fees, statements and interest, cards, spotting scams, reaching a person. The folder README records every cut with its reason, so nothing gets reinvented later.
+
+Two rules enforced inside the articles: every sentence states a number or states nothing (a vague sentence produces an unverifiable citation), and no sentence promises an outcome, quotes a legal deadline or states entitlement. Each article ends with what it does not cover, which is what the relevance gate should refuse.
+
+PRD open question 1 (approve help article topics, was blocking Module 5) is closed. Subhasish reviews and edits the wording; the fee numbers are invented and his to change.
+
+**Synthetic half written, 27th September 2026.** `evals/synthetic_cases.csv`, 40 cases against the five articles: 25 genuinely answerable, 15 near misses that look answerable and are not (a legal deadline dressed as a policy question, an account-specific question dressed as a fees question, bereavement inside a how-to, SCRA inside a rates question, a scam in progress, a direct injection). Committable, since it contains no CFPB text.
+
+Its `proposed_decision` column is Claude's and is a draft, not a label. Subhasish overrules it in the same three columns as the real cases. Cases where he overrules are kept visible on purpose.
+
+Gold set now stands at 160: 120 real complaints (April to June, stratified, seed 20260927) plus these 40.
+
 **Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 
 Commit order, so the pivot shows in history (this replaces the earlier order):

@@ -191,17 +191,19 @@ Handoffs, fraud routing and the watchdog work the same on every rung. Only what 
 
 Chatwoot Cloud trial account, one inbox, the Warmhand agent bot, a `fraud` team or queue. The Kettlewick help page from Lovable with the widget. A gold set built from CFPB complaints.
 
-**The ten help articles (proposed):** outlined by Subhasish, drafted by Claude, edited by Subhasish.
-1. Fees at Kettlewick (monthly, overdraft, foreign transaction, late payment)
-2. How interest works on your credit card
-3. Statements and payment due dates
-4. Freezing or replacing your card
-5. Rewards: earning and redeeming
-6. Deposits, withdrawals and ATM limits
-7. Closing your account
-8. **Spotting scams: what Kettlewick will never ask you**
-9. **You see a charge you don't recognize: what to do right now**
-10. Talking to a person: how to reach our team (the anti doom loop article)
+**The five help articles: written, 27th September 2026.** `docs/help_articles/`. Cut from ten to five against the measured issue distribution in the gold set pool, not against a guess. The folder README records what was cut and why, and what the articles deliberately do not cover.
+
+| Article | Covers |
+|---|---|
+| `fees.md` | What Kettlewick charges, checking and card |
+| `statements-and-interest.md` | Statement dates, due dates, grace period, how interest is calculated |
+| `cards.md` | Freezing, replacing, daily limits, travel |
+| `spotting-scams.md` | What Kettlewick will never ask. The only article Warmhand may cite in a fraud conversation |
+| `reaching-a-person.md` | How to reach a human, and what happens after you report something. The anti doom loop article |
+
+Two design rules hold inside the articles, not just in the replies. Every sentence states a number or states nothing, because a vague sentence produces a citation that cannot be verified in code. No sentence promises an outcome, quotes a legal deadline, or tells a customer what they are entitled to.
+
+Each article ends with what it does not cover. Those gaps are deliberate: they are what the relevance gate is supposed to refuse, and several gold set cases test exactly that.
 
 ### MVP flows and user stories
 
@@ -299,7 +301,7 @@ Six flows, 22 user stories, each with Given, When, Then acceptance criteria, and
 
 | # | Question | Owner | Blocking? |
 |---|---|---|---|
-| 1 | Approve the ten proposed help article topics (section 6) | Subhasish | Blocks Module 5 |
+| 1 | ~~Approve the ten proposed help article topics~~ **Closed 27th September.** Five written, `docs/help_articles/`. Subhasish reviews and edits | Subhasish | Review, not blocking |
 | 2 | Watchdog timeout: is 5 minutes right? | Subhasish | No |
 | 3 | Crisis template wording review | Subhasish | Before any live demo |
 | 4 | Log retention: is 30 days right? | Subhasish | No |
