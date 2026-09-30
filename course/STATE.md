@@ -154,6 +154,23 @@ Gold set now stands at 160: 120 real complaints (April to June, stratified, seed
 
 Two decisions left open on purpose in `evals/pii/README.md`: whether a 16 digit number failing the Luhn check should still be masked, and how to treat digits that are an amount in one reading and an identifier in another. Both need a recorded decision, not a default.
 
+## MODULE 1 DONE, 30th September 2026. The repo has an agent in it.
+
+`src/first_call.py` and `src/classify_one.py`, both typed by Subhasish, both pushed (`bf264f6`). Twelve days after starting, this project has made its first call to a model.
+
+**Cost, measured not guessed.** Claude Sonnet 5, $2 per million input tokens and $10 per million output (platform.claude.com/docs/en/about-claude/pricing, checked 30th September 2026). First real run on complaint 21195809: 253 tokens in, 6 out, 1.3 seconds.
+
+| Measure | Value |
+|---|---|
+| One classification, measured | $0.00057 |
+| Realistic per complaint end to end, allowing for the 206 word median and a real reply | about $0.0018 |
+| Gold set run, 30 cases | about $0.02 |
+| 10,000 complaints a month | about $18 |
+
+**Conclusion: cost is not a constraint on this product at any plausible volume.** Every model decision from here is about quality and latency. Reaching for the cheapest model to save $9 a month, at the risk of one missed scam, is a bad trade and the README should say so.
+
+**The finding that matters more than the cost.** The model answered `hand_off` on a credit report dispute, which is correct under policy section 1 (FCRA). But the prompt used for the test says nothing about FCRA, legal clocks or credit reports. It got the right answer because the word "dispute" in the prompt is vague enough to cover it. **A prompt that produces the right answer for the wrong reason is not a control.** Module 2's job is to make the prompt's categories the policy's categories, and to move the never-answer cases into code.
+
 **Next:** Stage 4 technical discovery, run as hands-on spikes rather than another document. Spike 1 (blocking): CFPB narrative availability, does the public API actually return consumer written complaint text and how much of it. Spike 2: model cost and latency on one real complaint. Deferred until needed, around Module 6: the Chatwoot trial checks (agent bots, API, labels, teams, priority, webhook signature) and a tunnel for local webhooks, because the trial clock starts at signup. Then Module 1, the first API call against a real CFPB complaint. Still open for his review: PRD v1.4, escalation policy v0.2, `docs/flows_and_stories.md`, the help article list (10 proposed, recommend cutting to 5), crisis template wording, watchdog timeout, log retention.
 
 Commit order, so the pivot shows in history (this replaces the earlier order):
