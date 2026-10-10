@@ -21,7 +21,7 @@ FirstPass is a GitHub App that reads each new issue on a repository, labels what
 
 **Why now.** Models can now call tools and return structured output reliably enough that a narrow, auditable agent is buildable by one person. The market moved in 2026 too. GitHub put the same safety pattern into its own platform (Agentic Workflows, public preview June 2026). Dosu, the best known open source triage bot, moved away from issue triage in August 2026. Triage bots are becoming a free platform feature, so FirstPass does not compete as a product. It competes as evidence: an open reference build that publishes when it stays quiet and how often it is wrong. See section 12.
 
-**Why now for the builder.** Hands-on reps with agents in production (orchestration, retrieval, evals, deployment) while between roles, producing public evidence rather than claims.
+**Why now for the builder.** Hands-on reps with agents in production (orchestration, retrieval, evals, deployment), producing public evidence rather than claims.
 
 ## 3. Goals and non-goals
 
